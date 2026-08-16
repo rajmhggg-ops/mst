@@ -3,6 +3,11 @@ from PIL import Image, ImageOps, ImageEnhance
 import pytesseract, io, os, re
 
 app = Flask(__name__)
+@app.route('/<path:filename>')
+def google_verification(filename):
+    if filename.startswith("google"):
+        return send_file(filename)
+    return "Not Found", 404
 app.config["MAX_CONTENT_LENGTH"] = 12 * 1024 * 1024
 
 ALLOWED = {"image/jpeg", "image/png", "image/webp"}
